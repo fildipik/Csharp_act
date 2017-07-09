@@ -52,6 +52,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AcceptConnectionRequest.cs" />
     <Compile Include="AddConnection.cs" />
     <Compile Include="CreatePost.cs" />
     <Compile Include="LoginPage.cs" />

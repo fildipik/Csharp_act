@@ -18,39 +18,49 @@ namespace FinalAssessment
             PageFactory.InitElements(driver, this);
         }
 
-        [FindsBy(How = How.Id, Using = "reg-firstname")]
+        
+
+        [FindsBy(How = How.Id, Using = "first-name")]
         private IWebElement FirstNameReg { get; set; }
 
-        [FindsBy(How = How.Id, Using = "reg-lastname")]
+        [FindsBy(How = How.Id, Using = "last-name")]
         private IWebElement LastNameReg { get; set; }
 
-        [FindsBy(How = How.Id, Using = "reg-email")]
+        [FindsBy(How = How.Id, Using = "join-email")]
         private IWebElement EMailReg { get; set; }
 
-        [FindsBy(How = How.Id, Using = "reg-password")]
+        [FindsBy(How = How.Id, Using = "join-password")]
         private IWebElement PasswordReg { get; set; }
 
-        [FindsBy(How = How.Id, Using = "registration-submit")]
+        [FindsBy(How = How.XPath, Using = "//*[@id=\"uno-reg-join\"]/div/div/div/div[2]/div[1]/div/div/form/fieldset/button/span")]
         private IWebElement SubmitButton { get; set; }
 
         //[FindsBy(How = How.Id, Using = "country-select")]
         //private IWebElement CountrySelect { get; set; }
 
-        [FindsBy(How = How.Id, Using = "phoneNumber")]
+        [FindsBy(How = How.Name, Using = "number-input")]
         private IWebElement PhoneNum { get; set; }
 
         [FindsBy(How = How.Id, Using = "submitPage1")]
         private IWebElement SendCode { get; set; }
 
 
-        public void Register(string first, string last , string email, string pass,string country, string phone)
+        public void CountryCode()
         {
+            IWebElement countryCode = driver.FindElement(By.Id("country-select"));
+            var selectCountry = new SelectElement(countryCode);
+            selectCountry.SelectByValue("ph");
+        }
+        public void Register(string first, string last , string email, string pass,string phone)
+        {
+
+
             FirstNameReg.SendKeys(first);
             LastNameReg.SendKeys(last);
             EMailReg.SendKeys(email);
             PasswordReg.SendKeys(pass);
             SubmitButton.Submit();
-            new SelectElement(driver.FindElement(By.Name("countryCode"))).SelectByValue(country);
+            CountryCode();
             PhoneNum.SendKeys(phone);
             SendCode.Submit();
 
